@@ -56,7 +56,7 @@ export function ApplicationsChart({ data }: ApplicationsChartProps) {
                 content={({ active, payload }) => {
                   if (active && payload && payload.length) {
                     return (
-                      <div className="backdrop-blur-[40px] bg-[#e8dfd0]/95 rounded-[14px] border border-white/25 shadow-[0_8px_24px_rgba(0,0,0,0.12)] px-5 py-4">
+                      <div className="backdrop-blur-[40px] bg-[#e8dfd0]/95 rounded-[14px] border border-white/25 px-5 py-4">
                         <div className="text-[13px] font-bold text-[#7a6b5a] mb-2">
                           {payload[0].payload.month}
                         </div>
