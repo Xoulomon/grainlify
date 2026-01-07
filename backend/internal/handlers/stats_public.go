@@ -67,5 +67,3 @@ SELECT
 		return c.Status(fiber.StatusOK).JSON(resp)
 	}
 }
-
-
