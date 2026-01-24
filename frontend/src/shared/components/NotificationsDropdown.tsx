@@ -41,7 +41,7 @@ export function NotificationsDropdown() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button
-          className={`h-[46px] w-[46px] rounded-full relative flex items-center justify-center backdrop-blur-[40px] transition-all hover:scale-105 shadow-[0px_6px_6.5px_-1px_rgba(0,0,0,0.36),0px_0px_4.2px_0px_rgba(0,0,0,0.69)] ${
+          className={`w-[25px] h-[25px] lg:h-[46px] lg:w-[46px] rounded-full relative flex items-center justify-center backdrop-blur-[40px] transition-all hover:scale-105 shadow-[0px_6px_6.5px_-1px_rgba(0,0,0,0.36),0px_0px_4.2px_0px_rgba(0,0,0,0.69)] ${
             darkTheme ? "bg-[#2d2820]" : "bg-[#d4c5b0]"
           }`}
         >
@@ -62,7 +62,7 @@ export function NotificationsDropdown() {
 
           {/* Notification Count Badge - Only show when count > 0 */}
           {notificationCount > 0 && (
-            <div className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 bg-gradient-to-br from-[#e8c571] to-[#c9983a] rounded-full shadow-[0_2px_8px_rgba(201,152,58,0.9),0_0_12px_rgba(201,152,58,0.7)] z-20 border-[2px] border-white flex items-center justify-center">
+            <div className="absolute -top-0.5 -right-0.5 lg:-top-1 lg:-right-1 w-2 h-2 lg:min-w-[18px] lg:h-[18px] px-1 bg-gradient-to-br from-[#e8c571] to-[#c9983a] rounded-full shadow-[0_2px_8px_rgba(201,152,58,0.9),0_0_12px_rgba(201,152,58,0.7)] z-20 border-[2px] border-white flex items-center justify-center">
               <span className="text-[10px] font-bold text-white leading-none">
                 {formatCount(notificationCount)}
               </span>

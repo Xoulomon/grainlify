@@ -84,7 +84,8 @@ export function Dashboard() {
   const [selectedEventName, setSelectedEventName] = useState<string | null>(
     null,
   );
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(
+     typeof window !== 'undefined' ? window.innerWidth < 768 : false);
   const [activeRole, setActiveRole] = useState<
     "contributor" | "maintainer" | "admin"
   >("contributor");
@@ -93,7 +94,18 @@ export function Dashboard() {
   const [viewingUserLogin, setViewingUserLogin] = useState<string | null>(null);
   const [settingsInitialTab, setSettingsInitialTab] =
     useState<SettingsTabType>("profile");
+  const [isSmallDevice, setIsSmallDevice] = useState(
+    typeof window !== 'undefined' ? window.innerWidth < 1024 : false
+  );
 
+  useEffect(() => { 
+    const handleResize = () => {
+      setIsSmallDevice(window.innerWidth < 1024);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   // ******************************************
 
   // Persist current tab across reload
@@ -435,7 +447,7 @@ export function Dashboard() {
         <div className="max-w-[1400px] mx-auto">
           {/* Premium Pill-Style Header - Greatest of All Time */}
           <div
-            className={`fixed top-2 right-2 left-auto z-[9999] flex items-center gap-3 h-[52px] py-3 rounded-[26px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] backdrop-blur-[90px] border transition-all duration-300 ${
+            className={`fixed top-2 right-2 left-auto z-[9999] flex items-center gap-1 md:gap-2 lg:gap-3 h-[52px] py-3 rounded-[26px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] backdrop-blur-[90px] border transition-all duration-300 ${
               isSidebarCollapsed ? "ml-[81px]" : "ml-[240px]"
             } ${
               darkTheme
@@ -460,7 +472,7 @@ export function Dashboard() {
                     : "shadow-[inset_1px_-1px_1px_0px_rgba(0,0,0,0.15),inset_-2px_2px_1px_-1px_rgba(255,255,255,0.35)]"
                 }`}
               />
-              <div className="relative h-full flex items-center px-5 justify-between">
+              <div className="relative h-full flex items-center px-2 lg:px-5 justify-between">
                 <div className="flex items-center flex-1">
                   <Search
                     className={`w-4 h-4 mr-3 flex-shrink-0 transition-colors ${
@@ -490,7 +502,7 @@ export function Dashboard() {
                 </div>
 
                 <div
-                  className="flex items-center gap-1.5 px-2 py-1 rounded border"
+                  className="hidden lg:flex  items-center gap-1.5 px-2 py-1 rounded border"
                   style={{
                     backgroundColor: darkTheme
                       ? "rgba(255, 255, 255, 0.08)"
@@ -527,13 +539,14 @@ export function Dashboard() {
             {/* Role Switcher */}
             <RoleSwitcher
               currentRole={activeRole}
+              isSmallDevice={isSmallDevice}
               onRoleChange={handleRoleChange}
             />
 
             {/* Theme Toggle - Separate Pill Button */}
             <button
               onClick={toggleTheme}
-              className={`h-[46px] w-[46px] rounded-full overflow-clip relative flex items-center justify-center backdrop-blur-[40px] transition-all hover:scale-105 shadow-[0px_6px_6.5px_-1px_rgba(0,0,0,0.36),0px_0px_4.2px_0px_rgba(0,0,0,0.69)] ${
+              className={`w-[25px] h-[25px] lg:h-[46px] lg:w-[46px] rounded-full overflow-clip relative flex items-center justify-center backdrop-blur-[40px] transition-all hover:scale-105 shadow-[0px_6px_6.5px_-1px_rgba(0,0,0,0.36),0px_0px_4.2px_0px_rgba(0,0,0,0.69)] ${
                 darkTheme ? "bg-[#2d2820]" : "bg-[#d4c5b0]"
               }`}
               title={darkTheme ? "Switch to light mode" : "Switch to dark mode"}
