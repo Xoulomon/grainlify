@@ -91,11 +91,11 @@ mod events;
 mod test_bounty_escrow;
 
 use events::{
-    emit_batch_funds_locked, emit_batch_funds_released, emit_bounty_initialized, emit_funds_locked,
+    emit_batch_funds_locked, emit_batch_funds_released, emit_bounty_initialized,
+    emit_contract_paused, emit_contract_unpaused, emit_emergency_withdrawal, emit_funds_locked,
     emit_funds_refunded, emit_funds_released, BatchFundsLocked, BatchFundsReleased,
-    BountyEscrowInitialized, FundsLocked, FundsRefunded, FundsReleased,
-    emit_contract_paused, emit_contract_unpaused, emit_emergency_withdrawal,
-    ContractPaused, ContractUnpaused, EmergencyWithdrawal,
+    BountyEscrowInitialized, ContractPaused, ContractUnpaused, EmergencyWithdrawal, FundsLocked,
+    FundsRefunded, FundsReleased,
 };
 use soroban_sdk::{
     contract, contracterror, contractimpl, contracttype, symbol_short, token, vec, Address, Env,
@@ -606,7 +606,7 @@ pub enum DataKey {
     FeeConfig,           // Fee configuration
     RefundApproval(u64), // bounty_id -> RefundApproval
     ReentrancyGuard,
-    IsPaused,            // Contract pause state
+    IsPaused, // Contract pause state
 }
 
 // ============================================================================

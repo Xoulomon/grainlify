@@ -705,7 +705,7 @@ fn test_emergency_withdraw() {
     // Pause contract
     client.pause();
     assert_eq!(client.is_paused(), true);
-    
+
     // Call emergency_withdraw (it will fail gracefully if no funds)
     // The important thing is that it's callable when paused
     let emergency_recipient = Address::generate(&env);
